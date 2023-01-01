@@ -3,6 +3,7 @@
 Forza Horizon 5 Telemetry displays the state of Forza Horizon (can be used for the entire series).
 Ex. RPM, speed, gear, accel, foot and side brakes, clutch, drive system, and steering wheel angle.
 
+
 ![start](https://raw.github.com/wiki/MMfnifni/ForzaHorizon_Telemetry/start.png)
 
 # How to use
@@ -27,6 +28,7 @@ config.ini can specify various values for this app.
 If you need ini-details, read config.ini.
 
 
-
+Copyright (c) 2023 mm Kreutzef(aka. Daiki.N)
+Released under the MIT license
 
 
