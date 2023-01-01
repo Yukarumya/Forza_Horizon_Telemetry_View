@@ -14,9 +14,11 @@ Ex. RPM, speed, gear, accel, foot and side brakes, clutch, drive system, and ste
 
 # Exterior
 Test play. Can change rev-limit and shift change timing.
+
 ![start](https://raw.github.com/wiki/MMfnifni/ForzaHorizon_Telemetry/test1.gif)
 
 Background opacity and window size can be changed.
+
 ![start](https://raw.github.com/wiki/MMfnifni/ForzaHorizon_Telemetry/test2.gif)
 
 
