@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32630.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForzaHorizon5Telemetry", "ForzaHorizon5Telemetry.csproj", "{ECC1EC7F-6199-42C7-966B-3DDB2915D4E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ソリューション項目", "ソリューション項目", "{5037259B-4808-4FE0-B2CA-DFABB0B5656C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ECC1EC7F-6199-42C7-966B-3DDB2915D4E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECC1EC7F-6199-42C7-966B-3DDB2915D4E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECC1EC7F-6199-42C7-966B-3DDB2915D4E8}.Debug|x64.ActiveCfg = Debug|x64
+		{ECC1EC7F-6199-42C7-966B-3DDB2915D4E8}.Debug|x64.Build.0 = Debug|x64
+		{ECC1EC7F-6199-42C7-966B-3DDB2915D4E8}.Release|Any CPU.ActiveCfg = rer|Any CPU
+		{ECC1EC7F-6199-42C7-966B-3DDB2915D4E8}.Release|Any CPU.Build.0 = rer|Any CPU
+		{ECC1EC7F-6199-42C7-966B-3DDB2915D4E8}.Release|x64.ActiveCfg = rer|x64
+		{ECC1EC7F-6199-42C7-966B-3DDB2915D4E8}.Release|x64.Build.0 = rer|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3A9F2828-A595-46A4-835E-64351BAF41FE}
+	EndGlobalSection
+EndGlobal
