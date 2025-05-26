@@ -63,7 +63,7 @@ namespace ForzaHorizon5Telemetry {
         SolidColorBrush centerBrushColor = new SolidColorBrush(), mainBrushColor = new SolidColorBrush(), rpmBrushColor = new SolidColorBrush(), slipBrushColor = new SolidColorBrush();
         bool overspeed = false;
         int speed = 0, maxRpm = 1, curtRpm = 1, minRpm = 1, slip = 0, performanceindex = 0, drivetype = 0, carclass = 0;
-        float slipfl, slipfr, sliprl, sliprr, speedFloat;
+        float slipfl, slipfr, sliprl, sliprr, speedFloat, boost;
         float revLimit = .82f, shitfChange = .76f;
         float rateSpeed = 0;
         int rateRPM = 0;
@@ -142,13 +142,13 @@ namespace ForzaHorizon5Telemetry {
 
                 isRace = (BitConverter.ToBoolean(data, 0x00));
                 if (!isRace) {
-                    textPause.Visibility = Visibility.Visible;
+                    //textPause.Visibility = Visibility.Visible;
                     rateStopwach.Stop();
                     continue;
                 }
                 rateStopwach.Start();
-                textPause.Visibility = Visibility.Hidden;
-
+                //textPause.Visibility = Visibility.Hidden;
+                
                 if ((carCahnge[0] != data[0xD8]) || (carCahnge[1] != data[0xDC]) || (carCahnge[2] != data[0xE0])) {
                     carclass = BitConverter.ToInt32(data, 0xD8);
                     performanceindex = BitConverter.ToInt32(data, 0xDC);
@@ -161,10 +161,11 @@ namespace ForzaHorizon5Telemetry {
                 maxRpm = (int)(BitConverter.ToSingle(data, 0x08)) + 1;
                 minRpm = (int)(BitConverter.ToSingle(data, 0x0C));
                 curtRpm = (int)(BitConverter.ToSingle(data, 0x10));
+                boost = (float)(Math.Round(BitConverter.ToSingle(data, 0x11C) / 14.5, 2, MidpointRounding.AwayFromZero));
                 slipfl = Math.Abs(BitConverter.ToSingle(data, 0x54));
                 slipfr = Math.Abs(BitConverter.ToSingle(data, 0x58));
                 sliprl = Math.Abs(BitConverter.ToSingle(data, 0x5C));
-                sliprr = Math.Abs(BitConverter.ToSingle(data, 0x50));
+                sliprr = Math.Abs(BitConverter.ToSingle(data, 0x60));
                 if (slipfl > 1.0 || slipfr > 1.0 || sliprl > 1.0 || sliprr > 1.0)
                     isSlip = true;
                 else
@@ -176,6 +177,7 @@ namespace ForzaHorizon5Telemetry {
                 hbrake = data[0x13E];
                 gear = data[0x13F];
                 steer = (sbyte)data[0x140];
+                //RawData.Text = BitConverter.ToString(data);
 
                 OnRecieve();
             }
@@ -251,24 +253,49 @@ namespace ForzaHorizon5Telemetry {
 
             textCurtRpm.Text = curtRpm.ToString().PadLeft((maxRpm == 0) ? 1 : ((byte)Math.Log10(maxRpm) + 1), '0');
             textMaxtRpm.Text = maxRpm.ToString();
+            //ブースト(ターボ)計
+            textboost.Text = boost.ToString("F2");
 
-            if (maxRpm != 0) {
+            if (boost <= -0.7)
+            {
+                boostneedle.Angle = -216;
+            }
+            else if (boost >= 2)
+            {
+                boostneedle.Angle = 36;
+            }else if (boost <= 0)
+            {
+                boostneedle.Angle = (boost * 154.2) - 108;
+            }else
+            {
+                boostneedle.Angle = (boost * 72) - 108;  
+            }
+            {
+
+            }
+
+
+            if (maxRpm != 0)
+            {
                 var rpm = (curtRpm * 256) / maxRpm;
                 recRpm.Width = rpm;
                 recRmpMin.Width = (minRpm * 256) / maxRpm;
-                if (maxRpm * revLimit <= curtRpm) {
+                if (maxRpm * revLimit <= curtRpm)
+                {
                     rpmBrushColor.Color = Color.FromArgb(0xCC, 0xFF, 0x00, 0x00);
                     recRpm.Fill = rpmBrushColor;
                     if (overspeed)
                         textRpm.Foreground = Brushes.Red;
                 }
-                else if (maxRpm * shitfChange <= curtRpm) {
+                else if (maxRpm * shitfChange <= curtRpm)
+                {
                     rpmBrushColor.Color = Color.FromArgb(0xCC, 0xFF, 0x8C, 0x00);
                     recRpm.Fill = rpmBrushColor;
                     if (overspeed)
                         textRpm.Foreground = Brushes.DarkOrange;
                 }
-                else {
+                else
+                {
                     rpmBrushColor.Color = Color.FromArgb(0xCC, (byte)rpm, (byte)(256 - rpm), (byte)(256 - rpm));
                     recRpm.Fill = rpmBrushColor;
                     textRpm.Foreground = Brushes.White;
@@ -372,7 +399,43 @@ namespace ForzaHorizon5Telemetry {
                 textSlip.Foreground = Brushes.Red;
             else
                 textSlip.Foreground = Brushes.White;
-
+            //タイヤゲージ
+            textTireFL.Text = (Math.Round((slipfl * 100), 2, MidpointRounding.AwayFromZero)).ToString("F2") + "%";
+            textTireRL.Text = (Math.Round((sliprl * 100), 2, MidpointRounding.AwayFromZero)).ToString("F2") + "%";
+            textTireFR.Text = (Math.Round((slipfr * 100), 2, MidpointRounding.AwayFromZero)).ToString("F2") + "%";
+            textTireRR.Text = (Math.Round((sliprr * 100), 2, MidpointRounding.AwayFromZero)).ToString("F2") + "%";
+            if (slipfl >= 1)
+            {
+                recFL.Height = 36;
+            }
+            else
+            {
+                recFL.Height = slipfl * 36;
+            }
+            if (sliprl >= 1)
+            {
+                recRL.Height = 36;
+            }
+            else
+            {
+                recRL.Height = sliprl * 36;
+            }
+            if (slipfr >= 1)
+            {
+                recFR.Height = 36;
+            }
+            else
+            {
+                recFR.Height = slipfr * 36;
+            }
+            if (sliprr >= 1)
+            {
+                recRR.Height = 36;
+            }
+            else
+            {
+                recRR.Height = sliprr * 36;
+            }
             recAccel.Width = accel;
             recFootBrake.Width = fbrake;
             recClutch.Width = clutch;

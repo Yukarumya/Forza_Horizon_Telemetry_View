@@ -115,7 +115,7 @@
     <StartupObject>ForzaHorizon5Telemetry.App</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>D795C5E2F6159B34887F00BE549C4F0BF1189209</ManifestCertificateThumbprint>
@@ -124,7 +124,7 @@
     <ManifestKeyFile>ForzaHorizon5Telemetry_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>

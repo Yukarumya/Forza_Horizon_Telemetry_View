@@ -9,8 +9,7 @@
  mc:Ignorable="d"
  Icon="/res/icon.png"
  Background="#FF000000"
- Title="Forza Telemetry" Height="356" Width="650"
- AllowsTransparency="True" WindowStyle="None" RenderTransformOrigin="650,356">
+ Title="Forza Telemetry" Height="399" Width="796" RenderTransformOrigin="650,356" ResizeMode="CanMinimize">
 
 
     <Window.Resources>
@@ -277,14 +276,14 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="textGear" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="296" Width="202" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Now Display"  FontSize="256" FontWeight="Medium" TextAlignment="Center" Margin="400,-32,0,0" ><Run Text="N"/><InlineUIContainer/></TextBlock>
-        <TextBlock x:Name="textSpeed" TextWrapping="Wrap" Text="000" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium" FontSize="72" HorizontalAlignment="Left" Width="124" Margin="402,213,0,70"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="[km/h]" Width="73" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium" FontSize="22" Height="29" VerticalAlignment="Top" Margin="525,254,0,0"/>
+        <TextBlock x:Name="textGear" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="259" Width="202" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Now Display"  FontSize="256" FontWeight="Medium" TextAlignment="Center" Margin="396,-58,0,0" ><Run Text="N"/><InlineUIContainer/></TextBlock>
+        <TextBlock x:Name="textSpeed" TextWrapping="Wrap" Text="000" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium" FontSize="72" HorizontalAlignment="Left" Width="124" Margin="402,192,0,91"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="[km/h]" Width="73" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium" FontSize="22" Height="29" VerticalAlignment="Top" Margin="525,233,0,0"/>
         <TextBlock x:Name="textRpm" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="34" Width="111" Foreground="White" FontSize="24" TextAlignment="Right" Margin="10,16,0,0" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium"><Run Text="RPM"/></TextBlock>
         <Rectangle Fill="#4CFFFFFF" HorizontalAlignment="Left" Height="32" Margin="126,13,0,0" Stroke="Black" VerticalAlignment="Top" Width="256"/>
         <Rectangle x:Name="recRpm" Fill="#CCFFFFFF" HorizontalAlignment="Left" Height="32" Margin="126,13,0,0" VerticalAlignment="Top" Width="0"/>
         <Rectangle x:Name="recRmpMin" Fill="#4C007AFF" HorizontalAlignment="Left" Height="32" Margin="126,13,0,0" VerticalAlignment="Top" Width="0"/>
-        <TextBlock x:Name="textPause" HorizontalAlignment="Left" Margin="387,281,0,-4" TextWrapping="Wrap" Text="PAUSE" VerticalAlignment="Top" Foreground="White" Height="79" Width="223" FontSize="58" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Now Display" FontWeight="Medium" TextAlignment="Center" />
+        <!-- <TextBlock x:Name="textPause" HorizontalAlignment="Left" Margin="387,281,0,-4" TextWrapping="Wrap" Text="PAUSE" VerticalAlignment="Top" Foreground="White" Height="79" Width="223" FontSize="58" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Now Display" FontWeight="Medium" TextAlignment="Center" />-->
         <Rectangle Fill="#4CFFFFFF" HorizontalAlignment="Left" Margin="126,87,0,0" Stroke="Black" Width="256" Height="32" VerticalAlignment="Top"/>
         <Rectangle x:Name="recAccel" Fill="#CCFFFFFF" HorizontalAlignment="Left" Height="32" Margin="126,87,0,0" VerticalAlignment="Top" Width="0"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="34" Width="111" Foreground="White" FontSize="24" TextAlignment="Right" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium"><Run Text="Accel"/></TextBlock>
@@ -300,26 +299,40 @@
         <Rectangle Fill="#4CFFFFFF" HorizontalAlignment="Left" Height="32" Margin="126,247,0,0" Stroke="Black" VerticalAlignment="Top" Width="256"/>
         <Rectangle x:Name="recSteer" Fill="#CCFFFFFF" HorizontalAlignment="Left" Height="32" Margin="126,247,0,0" VerticalAlignment="Top" Width="0"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="34" Width="111" Foreground="White" FontSize="24" TextAlignment="Right" Text="Steer" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium"/>
-        <CheckBox x:Name="chkFront" Content="CheckBox" HorizontalAlignment="Left" Margin="623,31,0,0" VerticalAlignment="Top" Width="17" IsChecked="True" Checked="chkFromt_click" Unchecked="chkFromt_click" Height="17"/>
+        <CheckBox x:Name="chkFront" Content="CheckBox" HorizontalAlignment="Right" Margin="623,31,0,0" VerticalAlignment="Top" Width="17" IsChecked="True" Checked="chkFromt_click" Unchecked="chkFromt_click" Height="17"/>
         <TextBlock x:Name="textSlip" HorizontalAlignment="Left" Margin="10,288,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="34" Width="111" Foreground="White" FontSize="24" TextAlignment="Right" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium"><Run Text="TireS"/><Run Text="l"/><Run Text="ip"/></TextBlock>
+        <!-- tire gauges-->
         <Rectangle Fill="#4CFFFFFF" HorizontalAlignment="Left" Height="32" Margin="126,287,0,0" Stroke="Black" VerticalAlignment="Top" Width="256"/>
         <Rectangle x:Name="recSlip" Fill="#CCFFFFFF" HorizontalAlignment="Left" Height="32" Margin="126,287,0,0" VerticalAlignment="Top" Width="0"/>
-        <Button Content="❌" FontSize="8px" HorizontalAlignment="Left" Margin="623,10,0,0" Width="16" Background="White" BorderBrush="{x:Null}" Click="Button_Click" Height="16" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textInfo" Margin="126,324,0,0" TextWrapping="Wrap" Text="Information" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium" FontSize="22" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="263"/>
+        <Rectangle Fill="#4CFFFFFF" HorizontalAlignment="Left" Height="36" Margin="464,276,0,0" Stroke="Black" VerticalAlignment="Top" Width="21"/>
+        <Rectangle x:Name="recFL" Fill="#CCFFFFFF" HorizontalAlignment="Left" Height="0" Margin="464,277,0,0" VerticalAlignment="Top" Width="21"/>
+        <Rectangle Fill="#4CFFFFFF" HorizontalAlignment="Left" Height="36" Margin="464,314,0,0" Stroke="Black" VerticalAlignment="Top" Width="21"/>
+        <Rectangle x:Name="recRL" Fill="#CCFFFFFF" HorizontalAlignment="Left" Height="0" Margin="464,314,0,0" VerticalAlignment="Top" Width="21"/>
+        <Rectangle Fill="#4CFFFFFF" HorizontalAlignment="Left" Height="36" Margin="507,276,0,0" Stroke="Black" VerticalAlignment="Top" Width="21"/>
+        <Rectangle x:Name="recFR" Fill="#CCFFFFFF" HorizontalAlignment="Left" Height="0" Margin="507,277,0,0" VerticalAlignment="Top" Width="21"/>
+        <Rectangle Fill="#4CFFFFFF" HorizontalAlignment="Left" Height="36" Margin="507,314,0,0" Stroke="Black" VerticalAlignment="Top" Width="21"/>
+        <Rectangle x:Name="recRR" Fill="#CCFFFFFF" HorizontalAlignment="Left" Height="0" Margin="507,314,0,0" Width="21" VerticalAlignment="Top"/>
+        <!-- tire texts-->
+        <TextBlock x:Name="textTireFL" Margin="387,280,0,0" TextWrapping="Wrap" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium" FontSize="20" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="75" Text="0.00%" TextAlignment="Right"/>
+        <TextBlock x:Name="textTireRL" Margin="387,318,0,0" TextWrapping="Wrap" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium" FontSize="20" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="75" Text="0.00%" TextAlignment="Right"/>
+        <TextBlock x:Name="textTireFR" Margin="533,280,0,0" TextWrapping="Wrap" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium" FontSize="20" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="81" Text="0.00%"/>
+        <TextBlock x:Name="textTireRR" Margin="533,319,0,0" TextWrapping="Wrap" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium" FontSize="20" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="81" Text="0.00%"/>
+        <Button Content="❌" FontSize="8px" HorizontalAlignment="Right" Margin="623,10,0,0" Width="16" Background="White" BorderBrush="{x:Null}" Click="Button_Click" Height="16" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textInfo" Margin="126,324,0,0" TextWrapping="Wrap" Text="Information" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium" FontSize="22" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="282"/>
         <Slider Style="{DynamicResource SliderStyle1}" x:Name="sliderRevLimit" SmallChange=".01" LargeChange=".01" TickFrequency=".01" Margin="122,2,0,0" Minimum="0" Maximum="1" Value="0.82" ValueChanged="Slider_ValueChanged_rev" Height="13" VerticalAlignment="Top" HorizontalAlignment="Left" Width="264" />
         <Slider Style="{DynamicResource SliderStyle1}" x:Name="sliderShiftChangeLimit" SmallChange=".01" LargeChange=".01" TickFrequency=".01" Margin="122,45,0,0" Minimum="0" Maximum="1" Value="0.76" ValueChanged="Slider_ValueChanged_shift" Height="13" VerticalAlignment="Top" HorizontalAlignment="Left" Width="264" />
-        <CheckBox x:Name="chkRedGear" Content="CheckBox" HorizontalAlignment="Left" Margin="623,73,0,0" VerticalAlignment="Top" Width="17" IsChecked="True" Checked="chkFromt_click" Unchecked="chkRedGear_click" Height="17" RenderTransformOrigin="0.405,1.739"/>
-        <TextBlock Margin="126,61,0,0" TextWrapping="Wrap" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium" FontSize="20" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="53"><Run Text="Curt :"/></TextBlock>
-        <TextBlock Margin="247,61,0,0" TextWrapping="Wrap" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium" FontSize="20" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="52"><Run Text="Max :"/></TextBlock>
-        <TextBlock x:Name="textCurtRpm" Margin="182,61,0,0" TextWrapping="Wrap" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium" FontSize="20" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="65" Text="00000"/>
-        <TextBlock x:Name="textMaxtRpm"  Margin="304,61,0,0" TextWrapping="Wrap" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium" FontSize="20" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="65" Text="00000"/>
-        <Button  x:Name="btnRightDown" Content="ᒧ" FontSize="8px" HorizontalAlignment="Left" Margin="623,330,0,0" Width="16" Background="White" BorderBrush="{x:Null}" Click="LeftBottom_Click" Height="16" VerticalAlignment="Top"/>
-        <Slider x:Name="sliderOpacity" Width="20" Margin="621,114,0,114" SmallChange="10" LargeChange="20" Minimum="0" Maximum="100" ValueChanged="sliderOpacity_ValueChanged" Orientation="Vertical" HorizontalAlignment="Left" Value="70" Height="128" VerticalAlignment="Center"/>
-        <Slider x:Name="sliderWindowSize"  Width="20" Margin="621,262,0,0" SmallChange=".1" LargeChange=".25" Minimum="0.5" Maximum="1.0" ValueChanged="sliderWindowSize_ValueChanged" Orientation="Vertical" HorizontalAlignment="Left" Value="1" Height="50" VerticalAlignment="Top"/>
-        <Button  x:Name="btnSizeDown" Content="▼" FontSize="8px" HorizontalAlignment="Left" Margin="623,312,0,0" Width="16" Background="White" BorderBrush="{x:Null}" Click="button_sizeDown" Height="16" VerticalAlignment="Top"/>
-        <Button  x:Name="btnSizeUp" Content="▲" FontSize="8px" HorizontalAlignment="Left" Margin="623,243,0,0" Width="16" Background="White" BorderBrush="{x:Null}" Click="button_sizeUp" Height="16" VerticalAlignment="Top"/>
+        <CheckBox x:Name="chkRedGear" Content="CheckBox" HorizontalAlignment="Right" Margin="623,73,0,0" VerticalAlignment="Top" Width="17" IsChecked="True" Checked="chkFromt_click" Unchecked="chkRedGear_click" Height="17" RenderTransformOrigin="0.405,1.739"/>
+        <TextBlock Margin="132,61,0,0" TextWrapping="Wrap" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium" FontSize="20" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="52"><Run Text="Max :"/></TextBlock>
+        <TextBlock x:Name="textCurtRpm" Margin="131,15,0,0" TextWrapping="Wrap" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium" FontSize="20" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="65" Text="00000"/>
+        <TextBlock x:Name="textMaxtRpm"  Margin="189,61,0,0" TextWrapping="Wrap" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium" FontSize="20" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="65" Text="00000"/>
+        <TextBlock x:Name="textboost" Margin="694,216,0,0" TextWrapping="Wrap" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium" FontSize="20" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="51" Text="0.00" TextAlignment="Right"/>
+        <Button  x:Name="btnRightDown" Content="ᒧ" FontSize="8px" HorizontalAlignment="Right" Margin="623,330,0,0" Width="16" Background="White" BorderBrush="{x:Null}" Click="LeftBottom_Click" Height="16" VerticalAlignment="Top"/>
+        <Slider x:Name="sliderOpacity" Width="20" Margin="621,119,0,0" SmallChange="10" LargeChange="20" Minimum="0" Maximum="100" ValueChanged="sliderOpacity_ValueChanged" Orientation="Vertical" HorizontalAlignment="Right" Value="70" Height="128" VerticalAlignment="Top"/>
+        <Slider x:Name="sliderWindowSize"  Width="20" Margin="621,262,0,0" SmallChange=".1" LargeChange=".25" Minimum="0.5" Maximum="1.0" ValueChanged="sliderWindowSize_ValueChanged" Orientation="Vertical" HorizontalAlignment="Right" Value="1" Height="50" VerticalAlignment="Top"/>
+        <Button  x:Name="btnSizeDown" Content="▼" FontSize="8px" HorizontalAlignment="Right" Margin="623,312,0,0" Width="16" Background="White" BorderBrush="{x:Null}" Click="button_sizeDown" Height="16" VerticalAlignment="Top"/>
+        <Button  x:Name="btnSizeUp" Content="▲" FontSize="8px" HorizontalAlignment="Right" Margin="623,243,0,0" Width="16" Background="White" BorderBrush="{x:Null}" Click="button_sizeUp" Height="16" VerticalAlignment="Top"/>
         <TextBlock Margin="620,48,0,0" TextWrapping="Wrap" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium" FontSize="8
-                   " Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="24" RenderTransformOrigin="0.5,0.5" TextAlignment="Center">
+                   " Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Width="24" RenderTransformOrigin="0.5,0.5" TextAlignment="Center">
             <TextBlock.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -328,7 +341,7 @@
                     <TranslateTransform/>
                 </TransformGroup>
             </TextBlock.RenderTransform><Run Text="top&#10;most"/></TextBlock>
-        <TextBlock Margin="616,88,0,0" TextWrapping="Wrap" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium" FontSize="8                    " Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="24" RenderTransformOrigin="0.5,0.5" TextAlignment="Center">
+        <TextBlock Margin="616,88,0,0" TextWrapping="Wrap" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium" FontSize="8                    " Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Width="24" RenderTransformOrigin="0.5,0.5" TextAlignment="Center">
             <TextBlock.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -338,8 +351,91 @@
                 </TransformGroup>
             </TextBlock.RenderTransform><Run Text="red of&#xA;levlimit"/></TextBlock>
         <TextBlock x:Name="textRateRPM" Margin="69,61,0,0" TextWrapping="Wrap" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium" FontSize="20" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="52" Text="▲▼ 0" TextAlignment="Right"/>
-        <TextBlock x:Name="textRateSpeed" Margin="526,232,0,0" TextWrapping="Wrap" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium" FontSize="20" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="67" Text="▲▼ 00"/>
+        <TextBlock x:Name="textRateSpeed" Margin="526,211,0,0" TextWrapping="Wrap" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium" FontSize="20" Height="22" VerticalAlignment="Top" HorizontalAlignment="Left" Width="67" Text="▲▼ 00"/>
+        <!-- <TextBox x:Name="RawData" Margin="0,379,0,0" TextWrapping="Wrap" FontFamily="MS Gothic> -->
+        <TextBlock Margin="618,216,0,0" TextWrapping="Wrap" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium" FontSize="20" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="76"><Run Text="Boost :"/></TextBlock>
+        <!-- xamlの知識が全然無いのでMicrosoft Copilotに発注した部分(ちゃんと勉強しろ) -->
+        <Grid Margin="598,18,0,186" Background="Black" Width="160" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Canvas x:Name="meterc" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="300">
+                <!-- 外側の円 -->
 
+                <!-- 目盛り用のスタイル -->
+                <Canvas.Resources>
+                    <Style x:Key="TickStyle" TargetType="Line">
+                        <Setter Property="Stroke" Value="White"/>
+                        <Setter Property="StrokeThickness" Value="2"/>
+                    </Style>
+                </Canvas.Resources>
+
+                <!-- 目盛り (10等分して配置：360° ÷ 10 = 36°ずつ回転) -->
+                <Line Style="{StaticResource TickStyle}" X1="150" Y1="60" X2="150" Y2="80">
+                    <Line.RenderTransform>
+                        <RotateTransform Angle="0" CenterX="150" CenterY="150"/>
+                    </Line.RenderTransform>
+                </Line>
+                <Line Style="{StaticResource TickStyle}" X1="150" Y1="60" X2="150" Y2="80">
+                    <Line.RenderTransform>
+                        <RotateTransform Angle="36" CenterX="150" CenterY="150"/>
+                    </Line.RenderTransform>
+                </Line>
+                <Line Style="{StaticResource TickStyle}" X1="150" Y1="60" X2="150" Y2="80">
+                    <Line.RenderTransform>
+                        <RotateTransform Angle="144" CenterX="150" CenterY="150"/>
+                    </Line.RenderTransform>
+                </Line>
+                <Line Style="{StaticResource TickStyle}" X1="150" Y1="60" X2="150" Y2="80">
+                    <Line.RenderTransform>
+                        <RotateTransform Angle="180" CenterX="150" CenterY="150"/>
+                    </Line.RenderTransform>
+                </Line>
+                <Line Style="{StaticResource TickStyle}" X1="150" Y1="60" X2="150" Y2="80">
+                    <Line.RenderTransform>
+                        <RotateTransform Angle="216" CenterX="150" CenterY="150"/>
+                    </Line.RenderTransform>
+                </Line>
+                <Line Style="{StaticResource TickStyle}" X1="150" Y1="60" X2="150" Y2="80">
+                    <Line.RenderTransform>
+                        <RotateTransform Angle="252" CenterX="150" CenterY="150"/>
+                    </Line.RenderTransform>
+                </Line>
+                <Line Style="{StaticResource TickStyle}" X1="150" Y1="60" X2="150" Y2="80">
+                    <Line.RenderTransform>
+                        <RotateTransform Angle="288" CenterX="150" CenterY="150"/>
+                    </Line.RenderTransform>
+                </Line>
+                <Line Style="{StaticResource TickStyle}" X1="150" Y1="60" X2="150" Y2="80">
+                    <Line.RenderTransform>
+                        <RotateTransform Angle="324" CenterX="150" CenterY="150"/>
+                    </Line.RenderTransform>
+                </Line>
+
+                <TextBlock TextWrapping="Wrap" Foreground="White" FontFamily="Constantia" FontWeight="Medium" Height="21" VerticalAlignment="Top" HorizontalAlignment="Center" Width="26" Canvas.Left="175" Canvas.Top="188"><Run Text="-0.7" FontFamily="Kozuka Gothic Pr6N B"/></TextBlock>
+                <TextBlock TextWrapping="Wrap" Foreground="White" FontFamily="Constantia" FontWeight="Medium" Height="21" VerticalAlignment="Center" HorizontalAlignment="Left" Width="26" Canvas.Left="83" Canvas.Top="159"><Run Text="0" FontFamily="Kozuka Gothic Pr6N B"/></TextBlock>
+                <TextBlock TextWrapping="Wrap" Foreground="White" FontFamily="Constantia" FontWeight="Medium" Height="21" VerticalAlignment="Center" HorizontalAlignment="Left" Width="26" Canvas.Left="87" Canvas.Top="120"><Run Text="0.5" FontFamily="Kozuka Gothic Pr6N B"/></TextBlock>
+                <TextBlock TextWrapping="Wrap" Foreground="White" FontFamily="Constantia" FontWeight="Medium" Height="21" VerticalAlignment="Top" HorizontalAlignment="Center" Width="26" Canvas.Left="105" Canvas.Top="89"><Run Text="1.0" FontFamily="Kozuka Gothic Pr6N B"/></TextBlock>
+                <TextBlock TextWrapping="Wrap" Foreground="White" FontFamily="Constantia" FontWeight="Medium" Height="21" VerticalAlignment="Center" HorizontalAlignment="Left" Width="26" Canvas.Left="140" Canvas.Top="76"><Run Text="1.5" FontFamily="Kozuka Gothic Pr6N B"/></TextBlock>
+                <TextBlock TextWrapping="Wrap" Foreground="White" FontFamily="Constantia" FontWeight="Medium" Height="21" VerticalAlignment="Center" HorizontalAlignment="Left" Width="26" Canvas.Left="175" Canvas.Top="89"><Run Text="2.0+" FontFamily="Kozuka Gothic Pr6N B"/></TextBlock>
+
+
+                <!-- ニードル（針）の定義 -->
+                <Polygon Points="5,150 10,150 5,60 0,150" Fill="Red" RenderTransformOrigin="0.5,1" Canvas.Left="-5" Canvas.Top="62" HorizontalAlignment="Left" VerticalAlignment="Top" Width="10">
+                    <Polygon.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform  x:Name="boostneedle" Angle="-108"/>
+                            <TranslateTransform X="150" Y="-62.132"/>
+                        </TransformGroup>
+                    </Polygon.RenderTransform>
+                </Polygon>
+
+                <!-- センターピボット -->
+                <Ellipse Canvas.Left="140" Canvas.Top="140" Width="20" Height="20" Fill="DarkGray"/>
+            </Canvas>
+        </Grid>
     </Grid>
+
+
+
 </Window>
 
