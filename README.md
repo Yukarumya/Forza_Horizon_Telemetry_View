@@ -31,7 +31,8 @@ Boost Meter.
 
 
 
-Original Copyright (c) 2023 mm Kreutzef(aka. Daiki.N)  
+Original: Copyright (c) 2023 mm Kreutzef(aka. Daiki.N)  
 Modded by Yukarumya  
-Released under the MIT license  
+Released under the [MIT license](https://opensource.org/licenses/mit-license.php )  
+
 
