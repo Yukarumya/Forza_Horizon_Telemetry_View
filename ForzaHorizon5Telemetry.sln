@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32630.194
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197 d17.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForzaHorizon5Telemetry", "ForzaHorizon5Telemetry.csproj", "{ECC1EC7F-6199-42C7-966B-3DDB2915D4E8}"
 EndProject
@@ -11,6 +11,8 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
+		PBRelease|Any CPU = PBRelease|Any CPU
+		PBRelease|x64 = PBRelease|x64
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 	EndGlobalSection
@@ -19,6 +21,10 @@ Global
 		{ECC1EC7F-6199-42C7-966B-3DDB2915D4E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECC1EC7F-6199-42C7-966B-3DDB2915D4E8}.Debug|x64.ActiveCfg = Debug|x64
 		{ECC1EC7F-6199-42C7-966B-3DDB2915D4E8}.Debug|x64.Build.0 = Debug|x64
+		{ECC1EC7F-6199-42C7-966B-3DDB2915D4E8}.PBRelease|Any CPU.ActiveCfg = PBRelease|Any CPU
+		{ECC1EC7F-6199-42C7-966B-3DDB2915D4E8}.PBRelease|Any CPU.Build.0 = PBRelease|Any CPU
+		{ECC1EC7F-6199-42C7-966B-3DDB2915D4E8}.PBRelease|x64.ActiveCfg = PBRelease|x64
+		{ECC1EC7F-6199-42C7-966B-3DDB2915D4E8}.PBRelease|x64.Build.0 = PBRelease|x64
 		{ECC1EC7F-6199-42C7-966B-3DDB2915D4E8}.Release|Any CPU.ActiveCfg = rer|Any CPU
 		{ECC1EC7F-6199-42C7-966B-3DDB2915D4E8}.Release|Any CPU.Build.0 = rer|Any CPU
 		{ECC1EC7F-6199-42C7-966B-3DDB2915D4E8}.Release|x64.ActiveCfg = rer|x64

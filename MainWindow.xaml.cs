@@ -63,7 +63,7 @@ namespace ForzaHorizon5Telemetry {
         SolidColorBrush centerBrushColor = new SolidColorBrush(), mainBrushColor = new SolidColorBrush(), rpmBrushColor = new SolidColorBrush(), slipBrushColor = new SolidColorBrush();
         bool overspeed = false;
         int speed = 0, maxRpm = 1, curtRpm = 1, minRpm = 1, slip = 0, performanceindex = 0, drivetype = 0, carclass = 0;
-        float slipfl, slipfr, sliprl, sliprr, speedFloat, boost;
+        float slipfl, slipfr, sliprl, sliprr, suspfl, suspfr, susprr, susprl, speedFloat, boost;
         float revLimit = .82f, shitfChange = .76f;
         float rateSpeed = 0;
         int rateRPM = 0;
@@ -166,6 +166,12 @@ namespace ForzaHorizon5Telemetry {
                 slipfr = Math.Abs(BitConverter.ToSingle(data, 0x58));
                 sliprl = Math.Abs(BitConverter.ToSingle(data, 0x5C));
                 sliprr = Math.Abs(BitConverter.ToSingle(data, 0x60));
+                suspfl = Math.Abs(BitConverter.ToSingle(data, 0x44));
+                suspfr = Math.Abs(BitConverter.ToSingle(data, 0x48));
+                susprl = Math.Abs(BitConverter.ToSingle(data, 0x4C));
+                susprr = Math.Abs(BitConverter.ToSingle(data, 0x50));
+
+
                 if (slipfl > 1.0 || slipfr > 1.0 || sliprl > 1.0 || sliprr > 1.0)
                     isSlip = true;
                 else
@@ -436,6 +442,17 @@ namespace ForzaHorizon5Telemetry {
             {
                 recRR.Height = sliprr * 36;
             }
+
+            //サスペンション
+            textSuspFL.Text = (Math.Round((suspfl * 100), 1, MidpointRounding.AwayFromZero)).ToString("F1") + "%";
+            textSuspRL.Text = (Math.Round((susprl * 100), 1, MidpointRounding.AwayFromZero)).ToString("F1") + "%";
+            textSuspFR.Text = (Math.Round((suspfr * 100), 1, MidpointRounding.AwayFromZero)).ToString("F1") + "%";
+            textSuspRR.Text = (Math.Round((susprr * 100), 1, MidpointRounding.AwayFromZero)).ToString("F1") + "%";
+            recSFL.Height = suspfl * 33;
+            recSRL.Height = susprl * 33;
+            recSFR.Height = suspfr * 33;
+            recSRR.Height = susprr * 33;
+
             recAccel.Width = accel;
             recFootBrake.Width = fbrake;
             recClutch.Width = clutch;
@@ -447,6 +464,7 @@ namespace ForzaHorizon5Telemetry {
                 recSteer.Fill = mainBrushColor;
 
         }
+
         private void chkRedGear_click(object sender, RoutedEventArgs e) {
             if (this.chkRedGear.IsChecked == true)
                 this.overspeed = true;
