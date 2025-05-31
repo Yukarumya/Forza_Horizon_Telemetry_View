@@ -5,8 +5,8 @@ It can Display RPM, Pedal, Something something... by Original
 and Tire Slip and Boost.
 
 
-[Forza Horizon 5 Telemetry](https://github.com/MMfnifni/ForzaHorizon_Telemetry)‚ğƒx[ƒX‚É‰ü‘¢‚µ‚½Forza Horizon—p‚ÌƒeƒŒƒƒgƒŠƒrƒ…[ƒA[‚Å‚·B  
-ƒIƒŠƒWƒiƒ‹‚É‚ ‚éƒGƒ“ƒWƒ“‰ñ“]”‚âƒyƒ_ƒ‹î•ñ‚É‰Á‚¦Aƒ^ƒCƒ„ƒXƒŠƒbƒvƒQ[ƒW‚âƒu[ƒXƒgƒ[ƒ^[‚ğ’Ç‰Á‚µ‚Ü‚µ‚½B(©•ª‚ª—~‚µ‚©‚Á‚½‚¾‚¯‚Å‚·)
+[Forza Horizon 5 Telemetry](https://github.com/MMfnifni/ForzaHorizon_Telemetry)ã‚’ãƒ™ãƒ¼ã‚¹ã«æ”¹é€ ã—ãŸForza Horizonç”¨ã®ãƒ†ãƒ¬ãƒ¡ãƒˆãƒªãƒ“ãƒ¥ãƒ¼ã‚¢ãƒ¼ã§ã™ã€‚  
+ã‚ªãƒªã‚¸ãƒŠãƒ«ã«ã‚ã‚‹ã‚¨ãƒ³ã‚¸ãƒ³å›è»¢æ•°ã‚„ãƒšãƒ€ãƒ«æƒ…å ±ã«åŠ ãˆã€ã‚¿ã‚¤ãƒ¤ã‚¹ãƒªãƒƒãƒ—ã‚²ãƒ¼ã‚¸ã‚„ãƒ–ãƒ¼ã‚¹ãƒˆãƒ¡ãƒ¼ã‚¿ãƒ¼ã‚’è¿½åŠ ã—ã¾ã—ãŸã€‚(è‡ªåˆ†ãŒæ¬²ã—ã‹ã£ãŸã ã‘ã§ã™)
 
 
 
@@ -19,12 +19,12 @@ and Tire Slip and Boost.
 4. Enter the number 62400 as DATA OUT IP PORT(don't forget save settings).  
 5. Run "ForzaHorizon5Telemetry.exe", and fun!!  
 
-# Added Features/’Ç‰Á‚µ‚½‹@”\
+# Added Features/è¿½åŠ ã—ãŸæ©Ÿèƒ½
 Tire Slip Gauge and Percentage.  
 Boost Meter.  
 
-ƒ^ƒCƒ„ƒXƒŠƒbƒv‚ÌƒQ[ƒW‚Æƒp[ƒZƒ“ƒe[ƒW‚Ì•\¦B  
-ƒu[ƒXƒgŒvB  
+ã‚¿ã‚¤ãƒ¤ã‚¹ãƒªãƒƒãƒ—ã®ã‚²ãƒ¼ã‚¸ã¨ãƒ‘ãƒ¼ã‚»ãƒ³ãƒ†ãƒ¼ã‚¸ã®è¡¨ç¤ºã€‚  
+ãƒ–ãƒ¼ã‚¹ãƒˆè¨ˆã€‚  
 ![start](https://raw.github.com/wiki/Yukarumya/Forza_Horizon_Telemetry_View/RunImage.gif)  
 
 
