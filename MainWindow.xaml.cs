@@ -63,7 +63,7 @@ namespace ForzaHorizon5Telemetry {
         SolidColorBrush centerBrushColor = new SolidColorBrush(), mainBrushColor = new SolidColorBrush(), rpmBrushColor = new SolidColorBrush(), slipBrushColor = new SolidColorBrush();
         bool overspeed = false;
         int speed = 0, maxRpm = 1, curtRpm = 1, minRpm = 1, slip = 0, performanceindex = 0, drivetype = 0, carclass = 0;
-        float slipfl, slipfr, sliprl, sliprr, suspfl, suspfr, susprr, susprl, speedFloat, boost;
+        float slipfl, slipfr, sliprl, sliprr, suspfl, suspfr, susprr, susprl, speedFloat, power, torque, boost;
         float revLimit = .82f, shitfChange = .76f;
         float rateSpeed = 0;
         int rateRPM = 0;
@@ -158,6 +158,8 @@ namespace ForzaHorizon5Telemetry {
 
                 speedFloat = (float)(BitConverter.ToSingle(data, 0x100) * 3.6);
                 speed = (int)speedFloat;
+                power = (float)Math.Round(BitConverter.ToSingle(data, 0x104) / 735.5, 1, MidpointRounding.AwayFromZero);
+                torque = (float)Math.Round(BitConverter.ToSingle(data, 0x108) / 9.806652, 1, MidpointRounding.AwayFromZero);
                 maxRpm = (int)(BitConverter.ToSingle(data, 0x08)) + 1;
                 minRpm = (int)(BitConverter.ToSingle(data, 0x0C));
                 curtRpm = (int)(BitConverter.ToSingle(data, 0x10));
@@ -259,6 +261,8 @@ namespace ForzaHorizon5Telemetry {
 
             textCurtRpm.Text = curtRpm.ToString().PadLeft((maxRpm == 0) ? 1 : ((byte)Math.Log10(maxRpm) + 1), '0');
             textMaxtRpm.Text = maxRpm.ToString();
+            textPower.Text = power.ToString("F1") + " PS";
+            textTorque.Text = torque.ToString("F1") + " kgf/m";
             //ブースト(ターボ)計
             textboost.Text = boost.ToString("F2");
 
