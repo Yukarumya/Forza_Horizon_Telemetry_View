@@ -14,9 +14,9 @@ and Tire Slip and Boost.
 
 
 # Tested Series
-Forza Horizon 4
-Forza Horizon 5
-Forza Horizon 6
+Forza Horizon 4  
+Forza Horizon 5  
+Forza Horizon 6  
 
 # How to use
 1. Run Forza, and goto HUD AND GAMEPLAY settings.  
