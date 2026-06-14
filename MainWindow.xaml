@@ -9,7 +9,7 @@
  mc:Ignorable="d"
  Icon="/res/icon.png"
  Background="#FF000000"
- Title="Forza Telemetry" Height="399" Width="796" RenderTransformOrigin="650,356" ResizeMode="CanMinimize" VerticalAlignment="Top">
+ Title="Forza Telemetry" Height="405" Width="796" RenderTransformOrigin="650,356" ResizeMode="CanMinimize" VerticalAlignment="Top">
 
 
     <Window.Resources>
@@ -487,9 +487,10 @@
         </Grid>
         <TextBlock Margin="618,216,0,0" TextWrapping="Wrap" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium" FontSize="20" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="76"><Run Text="Boost :"/></TextBlock>
         <TextBlock x:Name="textboost" Margin="694,216,0,0" TextWrapping="Wrap" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium" FontSize="20" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Width="51" Text="0.00" TextAlignment="Right"/>
-        <TextBlock x:Name="textSpeed" TextWrapping="Wrap" Text="000" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium" FontSize="72" HorizontalAlignment="Left" Width="124" Margin="402,192,0,0" VerticalAlignment="Top" Height="74"/>
+        <TextBlock x:Name="textSpeed" TextWrapping="Wrap" Text="000" Foreground="White" FontFamily="/ForzaHorizon5Telemetry;component/res/#Helvetica Neue LT Pro" FontWeight="Medium" FontSize="72" HorizontalAlignment="Left" Width="124" Margin="401,186,0,0" VerticalAlignment="Top" Height="76"/>
         <Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
         Width="15" Height="30"/>
+        <Button  x:Name="Motorsport_mode" Content="MS" FontSize="8px" HorizontalAlignment="Right" Margin="0,346,0,0" Width="16" Background="White" BorderBrush="{x:Null}" Click="button_Motorsportsmode" Height="16" VerticalAlignment="Top"/>
 
     </Grid>
 

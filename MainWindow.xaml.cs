@@ -7,7 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-
+using System.Security.Cryptography;
 
 
 
@@ -15,16 +15,6 @@ namespace ForzaHorizon5Telemetry {
     /// <summary>
     /// MainWindow.xaml の相互作用ロジック
     /// </summary>
-
-
-
-    //class dataConfig {
-    //        public int RevLimitLevel { get; set; }
-    //        public int RevLimitLevel { get; set; }
-    //        public int BackgroundOpacity { get; set; }
-    //        public bool RedGear { get; set; }
-    //        public bool Topmost { get; set; }
-    //    }
 
     public partial class MainWindow : Window {
         class ReadINI {
@@ -44,6 +34,13 @@ namespace ForzaHorizon5Telemetry {
                 int nDefault,
                 string lpFileName);
 
+            [DllImport("KERNEL32.DLL", CharSet = CharSet.Unicode, SetLastError = true)]
+            public static extern bool WritePrivateProfileString(
+                string lpAppName,
+                string lpKeyName,
+                string lpString,
+                string lpFileName);
+
             public string GetValueString(string section, string key, string fileName) {
                 var sb = new StringBuilder(1024);
                 GetPrivateProfileString(section, key, "", sb, Convert.ToUInt32(sb.Capacity), fileName);
@@ -53,6 +50,151 @@ namespace ForzaHorizon5Telemetry {
             public int GetValueInt(string section, string key, string fileName) {
                 var sb = new StringBuilder(1024);
                 return (int)GetPrivateProfileInt(section, key, 0, fileName);
+            }
+
+            public void WriteValueString(string section, string key, string value, string fileName) {
+                WritePrivateProfileString(section, key, value, fileName);
+            }
+        }
+
+        enum GameVariant {
+            Horizon,
+            Motorsport
+        }
+
+        class DataOffsets {
+            public int CarClass { get; set; }
+            public int PerformanceIndex { get; set; }
+            public int DriveType { get; set; }
+
+            public int SpeedFloat { get; set; }
+            public int Power { get; set; }
+            public int Torque { get; set; }
+
+            public int MaxRpm { get; set; }
+            public int MinRpm { get; set; }
+            public int CurtRpm { get; set; }
+
+            public int Boost { get; set; }
+
+            public int SlipFL { get; set; }
+            public int SlipFR { get; set; }
+            public int SlipRL { get; set; }
+            public int SlipRR { get; set; }
+
+            public int SuspFL { get; set; }
+            public int SuspFR { get; set; }
+            public int SuspRL { get; set; }
+            public int SuspRR { get; set; }
+
+            public int Accel { get; set; }
+            public int FBrake { get; set; }
+            public int Clutch { get; set; }
+            public int HBrake { get; set; }
+            public int Gear { get; set; }
+            public int Steer { get; set; }
+
+            public static DataOffsets ForHorizonDefaults() {
+                return new DataOffsets {
+                    CarClass = 0xD8,
+                    PerformanceIndex = 0xDC,
+                    DriveType = 0xE0,
+
+                    SpeedFloat = 0x100,
+                    Power = 0x104,
+                    Torque = 0x108,
+
+                    MaxRpm = 0x08,
+                    MinRpm = 0x0C,
+                    CurtRpm = 0x10,
+
+                    Boost = 0x11C,
+
+                    SlipFL = 0x54,
+                    SlipFR = 0x58,
+                    SlipRL = 0x5C,
+                    SlipRR = 0x60,
+
+                    SuspFL = 0x44,
+                    SuspFR = 0x48,
+                    SuspRL = 0x4C,
+                    SuspRR = 0x50,
+
+                    Accel = 0x13B,
+                    FBrake = 0x13C,
+                    Clutch = 0x13D,
+                    HBrake = 0x13E,
+                    Gear = 0x13F,
+                    Steer = 0x140
+                };
+            }
+
+            public static DataOffsets ForMotorsportDefaults() {
+                // Forza Motorsport のパケット順に基づくバイトオフセット（公式フォーマットから算出）
+                return new DataOffsets {
+                    // car info
+                    CarClass = 216,           // S32 CarClass (decimal 216 = 0xD8)
+                    PerformanceIndex = 220,  // S32 CarPerformanceIndex (0xDC)
+                    DriveType = 224,         // S32 DrivetrainType (0xE0)
+
+                    // speed/power/torque
+                    SpeedFloat = 244,        // F32 Speed
+                    Power = 248,             // F32 Power
+                    Torque = 252,            // F32 Torque
+
+                    // rpm
+                    MaxRpm = 8,              // F32 EngineMaxRpm
+                    MinRpm = 12,             // F32 EngineIdleRpm
+                    CurtRpm = 16,            // F32 CurrentEngineRpm
+
+                    // boost
+                    Boost = 272,             // F32 Boost
+
+                    // slips (TireSlipRatio)
+                    SlipFL = 84,             // F32 TireSlipRatioFrontLeft
+                    SlipFR = 88,             // F32 TireSlipRatioFrontRight
+                    SlipRL = 92,             // F32 TireSlipRatioRearLeft
+                    SlipRR = 96,             // F32 TireSlipRatioRearRight
+
+                    // suspensions (normalized)
+                    SuspFL = 68,             // F32 NormalizedSuspensionTravelFrontLeft
+                    SuspFR = 72,
+                    SuspRL = 76,
+                    SuspRR = 80,
+
+                    // inputs (Motorsport offsets)
+                    Accel = 303,             // U8 Accel
+                    FBrake = 304,            // U8 Brake
+                    Clutch = 305,            // U8 Clutch
+                    HBrake = 306,            // U8 HandBrake
+                    Gear = 307,              // U8 Gear
+                    Steer = 308              // S8 Steer
+                };
+            }
+
+            public void OverrideFromConfig(ReadINI ini, string iniPath) {
+                // セクション名: offsets
+                foreach (var prop in typeof(DataOffsets).GetProperties()) {
+                    string key = prop.Name;
+                    string val = ini.GetValueString("offsets", key, iniPath);
+                    if (!string.IsNullOrWhiteSpace(val) && val != "-1") {
+                        try {
+                            int num = ParseOffset(val);
+                            prop.SetValue(this, num);
+                        }
+                        catch {
+                            // 無効な値は無視
+                        }
+                    }
+                }
+            }
+
+            static int ParseOffset(string s) {
+                s = s.Trim();
+                if (s.StartsWith("0x", StringComparison.OrdinalIgnoreCase)) {
+                    return Convert.ToInt32(s.Substring(2), 16);
+                }
+                return int.Parse(s);
             }
         }
 
@@ -70,6 +212,9 @@ namespace ForzaHorizon5Telemetry {
         System.Diagnostics.Stopwatch rateStopwach = new System.Diagnostics.Stopwatch();
         int rateReload = 200;
 
+        GameVariant gameVariant = GameVariant.Horizon;
+        DataOffsets offsets = DataOffsets.ForHorizonDefaults();
+
         private void LeftBottom_Click(object sender, RoutedEventArgs e) {
             windowMain.Top = SystemParameters.WorkArea.Height - windowMain.Height + 40;
             windowMain.Left = SystemParameters.WorkArea.Width - windowMain.Width + 40;
@@ -85,6 +230,30 @@ namespace ForzaHorizon5Telemetry {
                 sliderWindowSize.Value = sliderWindowSize.Value + .1;
         }
 
+        private void button_Motorsportsmode(object sender, RoutedEventArgs e) {
+            if (gameVariant == GameVariant.Motorsport)
+            {
+                gameVariant = GameVariant.Horizon;
+                offsets = DataOffsets.ForHorizonDefaults();
+                Motorsport_mode.Content = "FH";
+            }
+            else
+            { 
+                gameVariant = GameVariant.Motorsport;
+                offsets = DataOffsets.ForMotorsportDefaults();
+                Motorsport_mode.Content = "FM";
+            }
+            try
+            {
+                var ini = new ReadINI();
+                ini.WriteValueString("general", "Game", (gameVariant == GameVariant.Motorsport) ? "Motorsport" : "Horizon", "./config.ini");
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("config.ini に書き込めませんでした: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         byte accel = 0, fbrake = 0, hbrake = 0, clutch = 0, gear = 0;
         sbyte steer = 0;
         bool isRace = false, isSlip = false;
@@ -94,100 +263,100 @@ namespace ForzaHorizon5Telemetry {
             mainBrushColor.Color = Color.FromArgb(0xCC, 0xFF, 0xFF, 0xFF);
             rpmBrushColor.Color = Color.FromArgb(0xCC, 0xFF, 0xFF, 0xFF);
             slipBrushColor.Color = Color.FromArgb(0xCC, 0xFF, 0xFF, 0xFF);
-            //System.Threading.Thread.Sleep(5000);
             InitializeComponent();
-
-            // var configs = File.ReadAllText("./config.json");
-
-
-            // dataConfig jsonData = new dataConfig();
-            // jsonData = JsonSerializer.Deserialize<dataConfig>(configs);
-
-            // revLimit = jsonData.RevLimitLevel;
-            // windowMain.Background.Opacity = jsonData.BackgroundOpacity / 100;
-            // chkFront.IsChecked = jsonData.Topmost;
-            // chkRedGear.IsChecked = jsonData.RedGear;
-
-
-            //  var ms = new MemoryStream(Encoding.UTF8.GetBytes((configs)));
-
-
 
             MouseLeftButtonDown += new MouseButtonEventHandler(Window1_MouseLeftButtonDown);
             if (System.IO.File.Exists("./config.ini"))
                 set_config("./config.ini");
             ListenMessage();
-            //SendMessage();
         }
 
 
         public async void ListenMessage() {
-            // 接続ソケットの準備
             var remote = new UdpClient(UDP_sendIP, UDP_sendPORT);
             var client = new UdpClient(UDP_PORT);
 
-
-            // 受信したデータを変換
             byte[] data;
             byte[] carCahnge = new byte[3];
 
-
             while (true) {
-                // データ受信待機
                 var result = await client.ReceiveAsync();
                 data = result.Buffer;
 
                 if (UDP_sendPORT != 0)
                     await remote.SendAsync(data, data.Length);
 
+                // 受信データ長が最小限必要な長さに満たない場合はスキップ
+                if (data == null || data.Length < 4) continue;
+
                 isRace = (BitConverter.ToBoolean(data, 0x00));
                 if (!isRace) {
-                    //textPause.Visibility = Visibility.Visible;
                     rateStopwach.Stop();
                     continue;
                 }
                 rateStopwach.Start();
-                //textPause.Visibility = Visibility.Hidden;
-                
-                if ((carCahnge[0] != data[0xD8]) || (carCahnge[1] != data[0xDC]) || (carCahnge[2] != data[0xE0])) {
-                    carclass = BitConverter.ToInt32(data, 0xD8);
-                    performanceindex = BitConverter.ToInt32(data, 0xDC);
-                    drivetype = BitConverter.ToInt32(data, 0xE0);
-                    OnRecieve_info();
+
+                // 安全にオフセットへアクセスするヘルパー
+                Func<int, bool> HasOffset = (off) => (data != null && data.Length > off);
+
+                try {
+                    if (!HasOffset(offsets.CarClass)) { continue; }
+
+                    if ((carCahnge[0] != data[offsets.CarClass]) || (carCahnge[1] != data[offsets.PerformanceIndex]) || (carCahnge[2] != data[offsets.DriveType])) {
+                        if (HasOffset(offsets.CarClass + 3)) // Int32 は 4 バイト
+                            carclass = BitConverter.ToInt32(data, offsets.CarClass);
+                        if (HasOffset(offsets.PerformanceIndex + 3))
+                            performanceindex = BitConverter.ToInt32(data, offsets.PerformanceIndex);
+                        if (HasOffset(offsets.DriveType + 3))
+                            drivetype = BitConverter.ToInt32(data, offsets.DriveType);
+                        OnRecieve_info();
+                    }
+
+                    if (HasOffset(offsets.SpeedFloat + 3))
+                        speedFloat = (float)(BitConverter.ToSingle(data, offsets.SpeedFloat) * 3.6);
+                    if (HasOffset(offsets.Power + 3))
+                        power = (float)Math.Round(BitConverter.ToSingle(data, offsets.Power) / 735.5, 1, MidpointRounding.AwayFromZero);
+                    if (HasOffset(offsets.Torque + 3))
+                        torque = (float)Math.Round(BitConverter.ToSingle(data, offsets.Torque) / 9.806652, 1, MidpointRounding.AwayFromZero);
+                    if (HasOffset(offsets.MaxRpm + 3))
+                        maxRpm = (int)(BitConverter.ToSingle(data, offsets.MaxRpm)) + 1;
+                    if (HasOffset(offsets.MinRpm + 3))
+                        minRpm = (int)(BitConverter.ToSingle(data, offsets.MinRpm));
+                    if (HasOffset(offsets.CurtRpm + 3))
+                        curtRpm = (int)(BitConverter.ToSingle(data, offsets.CurtRpm));
+                    if (HasOffset(offsets.Boost + 3))
+                        boost = (float)(Math.Round(BitConverter.ToSingle(data, offsets.Boost) / 14.5, 2, MidpointRounding.AwayFromZero));
+
+                    if (HasOffset(offsets.SlipFL + 3)) slipfl = Math.Abs(BitConverter.ToSingle(data, offsets.SlipFL));
+                    if (HasOffset(offsets.SlipFR + 3)) slipfr = Math.Abs(BitConverter.ToSingle(data, offsets.SlipFR));
+                    if (HasOffset(offsets.SlipRL + 3)) sliprl = Math.Abs(BitConverter.ToSingle(data, offsets.SlipRL));
+                    if (HasOffset(offsets.SlipRR + 3)) sliprr = Math.Abs(BitConverter.ToSingle(data, offsets.SlipRR));
+                    if (HasOffset(offsets.SuspFL + 3)) suspfl = Math.Abs(BitConverter.ToSingle(data, offsets.SuspFL));
+                    if (HasOffset(offsets.SuspFR + 3)) suspfr = Math.Abs(BitConverter.ToSingle(data, offsets.SuspFR));
+                    if (HasOffset(offsets.SuspRL + 3)) susprl = Math.Abs(BitConverter.ToSingle(data, offsets.SuspRL));
+                    if (HasOffset(offsets.SuspRR + 3)) susprr = Math.Abs(BitConverter.ToSingle(data, offsets.SuspRR));
+
+                    if (slipfl > 1.0 || slipfr > 1.0 || sliprl > 1.0 || sliprr > 1.0)
+                        isSlip = true;
+                    else
+                        isSlip = false;
+                    slip = (int)((slipfl + slipfr + sliprl + sliprr) * 256 / 4);
+
+                    if (HasOffset(offsets.Accel)) accel = data[offsets.Accel];
+                    if (HasOffset(offsets.FBrake)) fbrake = data[offsets.FBrake];
+                    if (HasOffset(offsets.Clutch)) clutch = data[offsets.Clutch];
+                    if (HasOffset(offsets.HBrake)) hbrake = data[offsets.HBrake];
+                    if (HasOffset(offsets.Gear)) gear = data[offsets.Gear];
+                    if (HasOffset(offsets.Steer)) steer = (sbyte)data[offsets.Steer];
+
+                    //RawData.Text = BitConverter.ToString(data);
+
+                    OnRecieve();
                 }
-
-                speedFloat = (float)(BitConverter.ToSingle(data, 0x100) * 3.6);
-                speed = (int)speedFloat;
-                power = (float)Math.Round(BitConverter.ToSingle(data, 0x104) / 735.5, 1, MidpointRounding.AwayFromZero);
-                torque = (float)Math.Round(BitConverter.ToSingle(data, 0x108) / 9.806652, 1, MidpointRounding.AwayFromZero);
-                maxRpm = (int)(BitConverter.ToSingle(data, 0x08)) + 1;
-                minRpm = (int)(BitConverter.ToSingle(data, 0x0C));
-                curtRpm = (int)(BitConverter.ToSingle(data, 0x10));
-                boost = (float)(Math.Round(BitConverter.ToSingle(data, 0x11C) / 14.5, 2, MidpointRounding.AwayFromZero));
-                slipfl = Math.Abs(BitConverter.ToSingle(data, 0x54));
-                slipfr = Math.Abs(BitConverter.ToSingle(data, 0x58));
-                sliprl = Math.Abs(BitConverter.ToSingle(data, 0x5C));
-                sliprr = Math.Abs(BitConverter.ToSingle(data, 0x60));
-                suspfl = Math.Abs(BitConverter.ToSingle(data, 0x44));
-                suspfr = Math.Abs(BitConverter.ToSingle(data, 0x48));
-                susprl = Math.Abs(BitConverter.ToSingle(data, 0x4C));
-                susprr = Math.Abs(BitConverter.ToSingle(data, 0x50));
-
-
-                if (slipfl > 1.0 || slipfr > 1.0 || sliprl > 1.0 || sliprr > 1.0)
-                    isSlip = true;
-                else
-                    isSlip = false;
-                slip = (int)((slipfl + slipfr + sliprl + sliprr) * 256 / 4);
-                accel = data[0x13B];
-                fbrake = data[0x13C];
-                clutch = data[0x13D];
-                hbrake = data[0x13E];
-                gear = data[0x13F];
-                steer = (sbyte)data[0x140];
-                //RawData.Text = BitConverter.ToString(data);
-
-                OnRecieve();
+                catch {
+                    // 受信データに想定外の長さ・値が来た場合はスキップして続行
+                    continue;
+                }
             }
         }
 
@@ -257,7 +426,7 @@ namespace ForzaHorizon5Telemetry {
             }
 
 
-            textSpeed.Text = speed.ToString().PadLeft(3, '0');
+            //textSpeed.Text = speedFloat.ToString().PadLeft(3, '0');
 
             textCurtRpm.Text = curtRpm.ToString().PadLeft((maxRpm == 0) ? 1 : ((byte)Math.Log10(maxRpm) + 1), '0');
             textMaxtRpm.Text = maxRpm.ToString();
@@ -370,7 +539,7 @@ namespace ForzaHorizon5Telemetry {
 
 
 
-            textSpeed.Text = speed.ToString().PadLeft(3, '0');
+            textSpeed.Text = Math.Floor(speedFloat).ToString().PadLeft(3, '0');
             if (maxRpm != 0) {
                 var rpm = (curtRpm * 256) / maxRpm;
                 recRpm.Width = rpm;
@@ -511,7 +680,8 @@ namespace ForzaHorizon5Telemetry {
             var program = new ReadINI();
 
 
-            try {
+            try
+            {
                 string value = program.GetValueString("communication", "UDP_PORT", iniPath);
                 if (value != "-1")
                     UDP_PORT = int.Parse(value);
@@ -528,47 +698,70 @@ namespace ForzaHorizon5Telemetry {
                 if (value != "-1")
                     Serial_PORT = int.Parse(value);
 
-
-
-
                 value = program.GetValueString("driving_support", "Rate_Reload", iniPath);
                 if (value != "-1")
                     rateReload = int.Parse(value);
 
                 value = program.GetValueString("driving_support", "RevLimit", iniPath);
-                if (value != "-1") {
+                if (value != "-1")
+                {
                     revLimit = float.Parse(value);
                     sliderRevLimit.Value = float.Parse(value);
                 }
 
                 value = program.GetValueString("driving_support", "ShitfChange", iniPath);
-                if (value != "-1") {
+                if (value != "-1")
+                {
                     shitfChange = float.Parse(value);
                     sliderShiftChangeLimit.Value = float.Parse(value);
                 }
 
-
-
-
                 value = program.GetValueString("exterior", "TopMost", iniPath);
-                if (value != "True" && value != "true") {
+                if (value != "True" && value != "true")
+                {
                     this.windowMain.Topmost = false;
                     this.chkFront.IsChecked = false;
                 }
 
                 value = program.GetValueString("exterior", "ChangeGearColorByRev", iniPath);
-                if (value != "True" && value != "true") {
+                if (value != "True" && value != "true")
+                {
                     this.overspeed = false;
                     this.chkRedGear.IsChecked = false;
                 }
 
                 value = program.GetValueString("exterior", "BackgroundOpacity", iniPath);
-                if (value != "-1") {
+                if (value != "-1")
+                {
                     sliderOpacity.Value = int.Parse(value);
                     windowMain.Background.Opacity = float.Parse(value) / 100.0;
                 }
+
+                // ゲーム種別の読み取り (general セクション)
+                value = program.GetValueString("general", "Game", iniPath);
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    if (value.Equals("Motorsport", StringComparison.OrdinalIgnoreCase))
+                    {
+                        gameVariant = GameVariant.Motorsport;
+                        Motorsport_mode.Content = "FM";
+                    }
+                    else
+                    {
+                        gameVariant = GameVariant.Horizon;
+                        Motorsport_mode.Content = "FH";
+                    }
+
+                    // デフォルトオフセットの選択
+                    offsets = (gameVariant == GameVariant.Motorsport) ? DataOffsets.ForMotorsportDefaults() : DataOffsets.ForHorizonDefaults();
+
+                    // config.ini の offsets セクションで個別上書き可能
+                    offsets.OverrideFromConfig(program, iniPath);
+
+                }
             }
-            catch {
+            catch
+            {
                 System.Windows.Forms.MessageBox.Show(
                     "Illegal argument was specified in config.ini.\n" +
                     "Check the value of config.ini",
