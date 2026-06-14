@@ -9,7 +9,7 @@
  mc:Ignorable="d"
  Icon="/res/icon.png"
  Background="#FF000000"
- Title="Forza Telemetry" Height="405" Width="796" RenderTransformOrigin="650,356" ResizeMode="CanMinimize" VerticalAlignment="Top">
+ Title="Forza Telemetry" Height="366" Width="796" RenderTransformOrigin="650,356" ResizeMode="NoResize" VerticalAlignment="Top" WindowStyle="None" AllowsTransparency="True">
 
 
     <Window.Resources>
@@ -407,7 +407,7 @@
         <!-- <TextBox x:Name="RawData" Margin="0,379,0,0" TextWrapping="Wrap" FontFamily="MS Gothic> -->
         <!-- Boost Gauge -->
         <!-- xamlの知識が全然無いのでMicrosoft Copilotに発注した部分(ちゃんと勉強しろ) -->
-        <Grid Margin="598,18,0,186" Background="Black" Width="160" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <Grid Margin="598,18,0,186" Width="160" HorizontalAlignment="Left" VerticalAlignment="Top">
             <Canvas x:Name="meterc" HorizontalAlignment="Center" VerticalAlignment="Top" Width="300" Height="299" Margin="0,-65,0,0">
                 <!-- 外側の円 -->
 
@@ -491,7 +491,7 @@
         <Canvas xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
         Width="15" Height="30"/>
         <Button  x:Name="Motorsport_mode" Content="MS" FontSize="8px" HorizontalAlignment="Right" Margin="0,346,0,0" Width="16" Background="White" BorderBrush="{x:Null}" Click="button_Motorsportsmode" Height="16" VerticalAlignment="Top"/>
-
+        <Button Content="━" FontSize="11" HorizontalAlignment="Right" Margin="0,10,17,0" Width="16" Background="White" BorderBrush="{x:Null}" Click="Minimize_Click" Height="16" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Arial Black"/>
     </Grid>
 
 

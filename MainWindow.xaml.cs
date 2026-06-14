@@ -364,6 +364,10 @@ namespace ForzaHorizon5Telemetry {
             System.Windows.Application.Current.Shutdown();
         }
 
+        private void Minimize_Click(object sender, RoutedEventArgs e) {
+            this.WindowState = WindowState.Minimized;
+        }
+
         private void sliderOpacity_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
             windowMain.Background.Opacity = sliderOpacity.Value / 100;
         }
