@@ -12,6 +12,12 @@ and Tire Slip and Boost.
 
 ![start](https://raw.github.com/wiki/Yukarumya/Forza_Horizon_Telemetry_View/SS.png)
 
+
+# Tested Series
+Forza Horizon 4
+Forza Horizon 5
+Forza Horizon 6
+
 # How to use
 1. Run Forza, and goto HUD AND GAMEPLAY settings.  
 2. Scroll to the bottom and enable DATA OUT.  
