@@ -17,6 +17,7 @@ and Tire Slip and Boost.
 Forza Horizon 4  
 Forza Horizon 5  
 Forza Horizon 6  
+Forza Motorsport (2023)  
 
 # How to use
 1. Run Forza, and goto HUD AND GAMEPLAY settings.  
